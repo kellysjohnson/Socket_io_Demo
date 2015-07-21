@@ -1,12 +1,12 @@
 var express = require('express');
 var app = express();
-var server = app.listen(3000);
+//var server = app.listen(3000);
 var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-var http = require('http').createServer(app);
+var server = require('http').createServer(app);
 var io = require('socket.io').listen(server);
 
 
@@ -29,17 +29,6 @@ app.use('/', routes);
 //app.use('/users', users);
 
 
-// io socket code
-io.on('connection', function(socket) {
-    console.log('a user connected here!');
-    socket.on('chat message', function (msg){
-        io.emit('chat message', msg);
-        console.log('message:' + msg);
-    });
-    socket.on('disconnect', function() {
-        console.log('user out... disconnected');
-    });
-});
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
